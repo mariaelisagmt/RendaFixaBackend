@@ -1,10 +1,9 @@
-﻿namespace renda_fixa_dominio.Entidades;
+﻿namespace RendaFixa.Domain.Entities;
 
-public class Conta
+public class Conta : BaseEntity
 {
-    public Guid Id { get; set; }
-    public int CodigoConta { get; set; }
     public Guid ClienteId { get; set; }
+    public int CodigoConta { get; set; }
     public Cliente Cliente { get; set; }
 
     public Conta(

@@ -1,14 +1,13 @@
-﻿namespace renda_fixa_dominio.Entidades;
+﻿namespace RendaFixa.Domain.Entities;
 
-public class RendaFixa
+public class ProdutoRendaFixa : BaseEntity
 {
-    public Guid Id { get; set; }
-    public string Nome {  get; set; }
+    public string Nome { get; set; }
     public string Indexador { get; set; }
     public decimal PrecoUnitario { get; set; }
-    public decimal Taxa {  get; set; }
-    public int Estoque {  get; set; }
-    public RendaFixa(
+    public decimal Taxa { get; set; }
+    public int Estoque { get; set; }
+    public ProdutoRendaFixa(
         Guid id,
         string nome,
         string indexador,

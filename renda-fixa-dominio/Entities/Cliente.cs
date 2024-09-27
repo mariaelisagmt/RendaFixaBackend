@@ -1,9 +1,7 @@
-﻿namespace renda_fixa_dominio.Entidades;
+﻿namespace RendaFixa.Domain.Entities;
 
-public class Cliente
+public class Cliente : BaseEntity
 {
-
-    public Guid Id { get; set; }
     public string Nome { get; set; }
     public string CPF { get; set; }
     public DateTime DataNascimento { get; set; }

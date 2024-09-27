@@ -1,4 +1,4 @@
-﻿namespace renda_fixa_dominio.Entidades;
+﻿namespace RendaFixa.Domain.Enum;
 
 public enum Status
 {
