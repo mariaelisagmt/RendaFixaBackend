@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>renda_fixa_service</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Validators\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\renda-fixa-dominio\RendaFixa.Domain.csproj" />
+    <ProjectReference Include="..\renda-fixa-infra\RendaFixa.Infrastruct.csproj" />
+  </ItemGroup>
+
+</Project>
