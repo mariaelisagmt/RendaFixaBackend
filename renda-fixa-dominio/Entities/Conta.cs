@@ -1,14 +1,18 @@
-﻿namespace RendaFixa.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace RendaFixa.Domain.Entities;
 
 public class Conta : BaseEntity
 {
-    public Guid ClienteId { get; set; }
+    [ForeignKey(nameof(Cliente.Id))]
+    public int ClienteId { get; set; }
     public int CodigoConta { get; set; }
-    public Cliente Cliente { get; set; }
+    public virtual Cliente Cliente { get; set; }
+    public virtual IList<Aporte> Aportes { get; set; }
 
     public Conta(
-        Guid id,
-        Guid clienteId,
+        int id,
+        int clienteId,
         int codigoConta)
     {
         Id = id;
