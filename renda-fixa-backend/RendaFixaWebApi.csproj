@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
@@ -17,6 +18,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\renda-fixa-dominio\RendaFixa.Domain.csproj" />
+    <ProjectReference Include="..\renda-fixa-infra\RendaFixa.Infrastruct.csproj" />
+    <ProjectReference Include="..\renda-fixa-service\RendaFixa.Service.csproj" />
   </ItemGroup>
 
 </Project>

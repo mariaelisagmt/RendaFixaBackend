@@ -1,21 +1,19 @@
-﻿using RendaFixa.Domain.Enum;
-
-namespace RendaFixa.Domain.Entities;
+﻿namespace RendaFixa.Domain.Entities;
 
 public class Aporte : BaseEntity
 {
-    public Guid RendaFixaId { get; set; }
-    public Guid ContaId { get; set; }
+    public int RendaFixaId { get; set; }
+    public int ContaId { get; set; }
     public DateTime DataOperacao { get; set; }
-    public Status Status { get; set; }
+    public int Status { get; set; }
     public virtual ProdutoRendaFixa RendaFixa { get; set; }
     public virtual Conta Conta { get; set; }
     public Aporte(
-        Guid id,
-        Guid rendaFixaId,
-        Guid contaId,
+        int id,
+        int rendaFixaId,
+        int contaId,
         DateTime dataOperacao,
-        Status status)
+        int status)
     {
         Id = id;
         RendaFixaId = rendaFixaId;

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using RendaFixa.Domain.Entities;
 
-namespace renda_fixa_infra.Mapping;
+namespace RendaFixa.Infrastruct.Mapping;
 
 public class ProdutoRendaFixaMap : IEntityTypeConfiguration<ProdutoRendaFixa>
 {
@@ -30,5 +30,10 @@ public class ProdutoRendaFixaMap : IEntityTypeConfiguration<ProdutoRendaFixa>
         builder.Property(p => p.Estoque)
             .HasColumnName("estoque")
             .HasColumnType("int");
+
+        builder.HasMany(x => x.Aportes)
+            .WithOne(y => y.RendaFixa)
+            .HasForeignKey(y => y.RendaFixaId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

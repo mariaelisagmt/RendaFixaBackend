@@ -5,8 +5,9 @@ public class Cliente : BaseEntity
     public string Nome { get; set; }
     public string CPF { get; set; }
     public DateTime DataNascimento { get; set; }
+    public virtual IList<Conta> Contas { get; set; }
     public Cliente(
-        Guid id,
+        int id,
         string nome,
         string cPF,
         DateTime dataNascimento)

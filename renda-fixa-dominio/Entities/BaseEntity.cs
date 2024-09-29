@@ -1,6 +1,9 @@
-﻿namespace RendaFixa.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RendaFixa.Domain.Entities;
 
 public class BaseEntity
 {
-    public Guid Id { get; set; }
+    [Key]
+    public int Id { get; set; }
 }

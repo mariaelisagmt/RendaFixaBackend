@@ -7,8 +7,9 @@ public class ProdutoRendaFixa : BaseEntity
     public decimal PrecoUnitario { get; set; }
     public decimal Taxa { get; set; }
     public int Estoque { get; set; }
+    public virtual IList<Aporte> Aportes { get; set; }
     public ProdutoRendaFixa(
-        Guid id,
+        int id,
         string nome,
         string indexador,
         decimal precoUnitario,
