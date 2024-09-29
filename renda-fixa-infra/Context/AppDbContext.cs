@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using renda_fixa_infra.Mapping;
+using RendaFixa.Infrastruct.Mapping;
 using RendaFixa.Domain.Entities;
 
 namespace RendaFixa.Infrastruct.Context;
@@ -13,7 +13,7 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<Cliente> Cliente { get; set; }
-    public DbSet<ContaMap> Conta { get; set; }
+    public DbSet<Conta> Conta { get; set; }
     public DbSet<Aporte> Aporte { get; set; }
     public DbSet<ProdutoRendaFixa> ProdutoRendaFixa { get; set; }
 
@@ -28,6 +28,6 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=monorail.proxy.rlwy.net;Port=19735;Database=Toro;User=root;Password=hfTOivBbiGUJueruCKMQdhZhwlwJCriH");
+        optionsBuilder.UseSqlServer("Server=localhost;Database=Financeiro;User Id=sa;Password=qwert112358;");
     }
 }

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RendaFixa.Domain.Entities;
 
-namespace renda_fixa_infra.Mapping;
+namespace RendaFixa.Infrastruct.Mapping;
 
 public class ClienteMap : IEntityTypeConfiguration<Cliente>
 {
@@ -12,16 +12,21 @@ public class ClienteMap : IEntityTypeConfiguration<Cliente>
         builder.HasKey(p => p.Id);
 
         builder.Property(p => p.Nome)
-            .HasConversion(p => p.ToString(), p => p)
+            .HasConversion(prop => prop.ToString(), prop => prop)
             .HasColumnName("nome")
-            .HasColumnType("varchar(100)");
+            .HasColumnType("varchar(255)")
+            .HasMaxLength(255)
+            .IsRequired();
 
         builder.Property(p => p.DataNascimento)
             .HasColumnName("data_nascimento")
-            .HasColumnType("datetime");
+            .HasColumnType("datetime")
+            .IsRequired();
 
         builder.Property(p => p.CPF)
+            .HasConversion(prop => prop.ToString(), prop => prop)
             .HasColumnName("cpf")
-            .HasColumnType("varchar(20)");
+            .HasColumnType("varchar(11)")
+            .IsRequired();
     }
 }

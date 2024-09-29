@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using RendaFixa.Domain.Entities;
 
-namespace renda_fixa_infra.Mapping;
+namespace RendaFixa.Infrastruct.Mapping;
 
 public class AporteMap : IEntityTypeConfiguration<Aporte>
 {
@@ -13,18 +13,22 @@ public class AporteMap : IEntityTypeConfiguration<Aporte>
 
         builder.Property(p => p.RendaFixaId)
             .HasColumnName("renda_fixa_fk")
-            .HasColumnType("uniquidentifier");
+            .HasColumnType("uniquidentifier")
+            .IsRequired();
 
         builder.Property(p => p.ContaId)
             .HasColumnName("conta_fk")
-            .HasColumnType("uniquidentifier");
+            .HasColumnType("uniquidentifier")
+            .IsRequired();
 
         builder.Property(p => p.DataOperacao)
             .HasColumnName("data_operacao")
-            .HasColumnType("datetime");
+            .HasColumnType("datetime")
+            .IsRequired();
 
         builder.Property(p => p.Status)
             .HasColumnName("status")
-            .HasColumnType("bit");
+            .HasColumnType("integer")
+            .IsRequired();
     }
 }

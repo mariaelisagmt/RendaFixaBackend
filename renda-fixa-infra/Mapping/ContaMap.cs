@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using RendaFixa.Domain.Entities;
 
-namespace renda_fixa_infra.Mapping;
+namespace RendaFixa.Infrastruct.Mapping;
 
 public class ContaMap : IEntityTypeConfiguration<Conta>
 {
@@ -13,10 +13,22 @@ public class ContaMap : IEntityTypeConfiguration<Conta>
 
         builder.Property(p => p.ClienteId)
             .HasColumnName("cliente_fk")
-            .HasColumnType("uniquidentifier");
+            .HasColumnType("uniquidentifier")
+            .IsRequired();
 
         builder.Property(p => p.CodigoConta)
             .HasColumnName("codigo_conta")
-            .HasColumnType("int");
+            .HasColumnType("int")
+            .IsRequired();
+
+        builder.HasOne(x => x.Cliente)
+            .WithMany(y => y.Contas)
+            .HasForeignKey(x => x.ClienteId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        builder.HasMany(x => x.Aportes)
+            .WithOne(y => y.Conta)
+            .HasForeignKey(y => y.ContaId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }
