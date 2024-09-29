@@ -1,0 +1,2 @@
+Add-Migration cliente -Verbose -Context AppDbContext
+Adicionando migration

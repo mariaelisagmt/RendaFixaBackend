@@ -1,6 +1,6 @@
 @renda_fixa_backend_HostAddress = http://localhost:5207
 
-GET {{renda_fixa_backend_HostAddress}}/weatherforecast/
+GET {{renda_fixa_backend_HostAddress}}/rendafixa/
 Accept: application/json
 
 ###
