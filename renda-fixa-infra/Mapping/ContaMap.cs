@@ -13,12 +13,17 @@ public class ContaMap : IEntityTypeConfiguration<Conta>
 
         builder.Property(p => p.ClienteId)
             .HasColumnName("cliente_fk")
-            .HasColumnType("uniquidentifier")
+            .HasColumnType("int")
             .IsRequired();
 
-        builder.Property(p => p.CodigoConta)
-            .HasColumnName("codigo_conta")
+        builder.Property(p => p.Codigo)
+            .HasColumnName("codigo")
             .HasColumnType("int")
+            .IsRequired();
+        
+        builder.Property(p => p.Saldo)
+            .HasColumnName("saldo")
+            .HasColumnType("decimal")
             .IsRequired();
 
         builder.HasOne(x => x.Cliente)

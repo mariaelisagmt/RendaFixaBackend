@@ -13,12 +13,12 @@ public class AporteMap : IEntityTypeConfiguration<Aporte>
 
         builder.Property(p => p.RendaFixaId)
             .HasColumnName("renda_fixa_fk")
-            .HasColumnType("uniquidentifier")
+            .HasColumnType("int")
             .IsRequired();
 
         builder.Property(p => p.ContaId)
             .HasColumnName("conta_fk")
-            .HasColumnType("uniquidentifier")
+            .HasColumnType("int")
             .IsRequired();
 
         builder.Property(p => p.DataOperacao)

@@ -22,7 +22,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         Contexto.Entry(objeto).State = EntityState.Modified;
         await Contexto.SaveChangesAsync();
     }
-    public async Task DeleteAsync(Guid id)
+    public async Task DeleteAsync(int id)
     {
         var entity = await GetByIdAsync(id);
         if (entity != null)
@@ -32,5 +32,5 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         }
     }
     public async Task<IList<TEntity>> GetAllAsync() => await Contexto.Set<TEntity>().ToListAsync();
-    public async Task<TEntity> GetByIdAsync(Guid id) => await Contexto.Set<TEntity>().FindAsync(id);
+    public async Task<TEntity> GetByIdAsync(int id) => await Contexto.Set<TEntity>().FindAsync(id);
 }

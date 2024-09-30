@@ -31,7 +31,7 @@ namespace RendaFixa.Infrastruct.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ContaId")
-                        .HasColumnType("uniquidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("conta_fk");
 
                     b.Property<DateTime>("DataOperacao")
@@ -39,7 +39,7 @@ namespace RendaFixa.Infrastruct.Migrations
                         .HasColumnName("data_operacao");
 
                     b.Property<int>("RendaFixaId")
-                        .HasColumnType("uniquidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("renda_fixa_fk");
 
                     b.Property<int>("Status")
@@ -92,7 +92,7 @@ namespace RendaFixa.Infrastruct.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ClienteId")
-                        .HasColumnType("uniquidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("cliente_fk");
 
                     b.Property<int>("CodigoConta")
