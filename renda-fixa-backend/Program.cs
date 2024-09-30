@@ -23,13 +23,15 @@ builder.Services.AddSwaggerGen();
 //BD
 builder.Services.AddDbContext<AppDbContext>(p =>
 {
-    p.UseSqlServer(configuration.GetConnectionString("SqlServer"),
+    p.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
     m => m.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName));
 });
 
 //builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
 builder.Services.AddScoped<IBaseRepository<ProdutoRendaFixa>, BaseRepository<ProdutoRendaFixa>>();
+builder.Services.AddScoped<IBaseRepository<Conta>, BaseRepository<Conta>>();
+builder.Services.AddScoped<IBaseRepository<Aporte>, BaseRepository<Aporte>>();
 builder.Services.AddScoped<IProdutoRendaFixaService, ProdutoRendaFixaService>();
 
 //USANDO O AUTOMAPPER PARA UTILIZAR AS VIEWS MODELS
