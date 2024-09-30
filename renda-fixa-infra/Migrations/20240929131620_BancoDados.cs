@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RendaFixa.Infrastruct.Migrations
 {
     /// <inheritdoc />
-    public partial class cliente : Migration
+    public partial class BancoDados : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -49,7 +49,7 @@ namespace RendaFixa.Infrastruct.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    cliente_fk = table.Column<int>(type: "uniquidentifier", nullable: false),
+                    cliente_fk = table.Column<int>(type: "int", nullable: false),
                     codigo_conta = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -68,8 +68,8 @@ namespace RendaFixa.Infrastruct.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    renda_fixa_fk = table.Column<int>(type: "uniquidentifier", nullable: false),
-                    conta_fk = table.Column<int>(type: "uniquidentifier", nullable: false),
+                    renda_fixa_fk = table.Column<int>(type: "int", nullable: false),
+                    conta_fk = table.Column<int>(type: "int", nullable: false),
                     data_operacao = table.Column<DateTime>(type: "datetime", nullable: false),
                     status = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -102,6 +102,8 @@ namespace RendaFixa.Infrastruct.Migrations
                 name: "IX_conta_cliente_fk",
                 table: "conta",
                 column: "cliente_fk");
+
+            //TODO adicionando dados padrão para as tabelas
         }
 
         /// <inheritdoc />

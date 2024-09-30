@@ -28,6 +28,6 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=localhost;Database=Financeiro;User Id=sa;Password=qwert112358;");
+        //optionsBuilder.UseSqlServer("Server=localhost;Database=Financeiro;User Id=sa;Password=qwert112358;");
     }
 }

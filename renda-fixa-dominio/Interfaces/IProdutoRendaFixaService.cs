@@ -4,7 +4,8 @@ namespace RendaFixa.Domain.Interfaces;
 
 public interface IProdutoRendaFixaService
 {
-    //Task ComprarAsync();
+    Task ComprarAsync(int produtoId, int contaId, int quantidade);
+    Task<Conta> GetContaAsync(int contaId);
     Task<IList<ProdutoRendaFixa>> GetAllAsync();
-    Task<ProdutoRendaFixa> GetByIdAsync(Guid id);
+    Task<ProdutoRendaFixa> GetByIdAsync(int id);
 }

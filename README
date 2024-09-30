@@ -1,2 +1,13 @@
-Add-Migration cliente -Verbose -Context AppDbContext
-Adicionando migration
+#Adicionando migration
+Add-Migration BancoDados -Verbose -Context AppDbContext
+
+#Executando comando no banco de dados
+update-database
+
+#dados
+https://www.macoratti.net/20/08/efc_migration1.htm
+
+Arquitetura limpa
+DDD
+Injeção de dependencia
+Principio da responsabilidade unica

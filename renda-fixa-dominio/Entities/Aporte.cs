@@ -9,13 +9,11 @@ public class Aporte : BaseEntity
     public virtual ProdutoRendaFixa RendaFixa { get; set; }
     public virtual Conta Conta { get; set; }
     public Aporte(
-        int id,
         int rendaFixaId,
         int contaId,
         DateTime dataOperacao,
         int status)
     {
-        Id = id;
         RendaFixaId = rendaFixaId;
         ContaId = contaId;
         DataOperacao = dataOperacao;

@@ -5,11 +5,11 @@ namespace RendaFixa.WebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class RendaFixaController : ControllerBase
+public class ProdutoRendaFixaController : ControllerBase
 {
     private readonly IProdutoRendaFixaService service;
 
-    public RendaFixaController(
+    public ProdutoRendaFixaController(
         IProdutoRendaFixaService servico)
     {
         service = servico;
@@ -24,10 +24,27 @@ public class RendaFixaController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(Guid id)
+    public async Task<IActionResult> GetById([FromRoute]int id)
     {
         var resultado = await service.GetByIdAsync(id);
 
         return Ok(resultado);
     }
+
+    [HttpGet("{contaid}")]
+    public async Task<IActionResult> GetContaById([FromRoute]int contaid)
+    {
+        var resultado = await service.GetContaAsync(contaid);
+
+        return Ok(resultado);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Comprar(int produtoId, int contaId, int qtd)
+    {
+        await service.ComprarAsync(produtoId, contaId, qtd);
+
+        return Ok();
+    }
+
 }
