@@ -7,30 +7,30 @@ namespace RendaFixa.Infrastruct.Repository;
 
 public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
 {
-    private readonly AppDbContext Contexto;
+    protected readonly AppDbContext contexto;
     public BaseRepository(AppDbContext contexto)
     {
-        Contexto = contexto;
+        this.contexto = contexto;
     }
     public async Task InsertAsync(TEntity objeto, CancellationToken cancellationToken)
     {
-        await Contexto.Set<TEntity>().AddAsync(objeto);
-        await Contexto.SaveChangesAsync(cancellationToken);
+        await contexto.Set<TEntity>().AddAsync(objeto);
+        await contexto.SaveChangesAsync(cancellationToken);
     }
     public async Task UpdateAsync(TEntity objeto, CancellationToken cancellationToken)
     {
-        Contexto.Entry(objeto).State = EntityState.Modified;
-        await Contexto.SaveChangesAsync(cancellationToken);
+        contexto.Entry(objeto).State = EntityState.Modified;
+        await contexto.SaveChangesAsync(cancellationToken);
     }
     public async Task DeleteAsync(int id, CancellationToken cancellationToken)
     {
         var entity = await GetByIdAsync(id, cancellationToken);
         if (entity != null)
         {
-            Contexto.Set<TEntity>().Remove(entity);
-            await Contexto.SaveChangesAsync(cancellationToken);
+            contexto.Set<TEntity>().Remove(entity);
+            await contexto.SaveChangesAsync(cancellationToken);
         }
     }
-    public async Task<IList<TEntity>> GetAllAsync(CancellationToken cancellationToken) => await Contexto.Set<TEntity>().ToListAsync(cancellationToken);
-    public async Task<TEntity> GetByIdAsync(int id, CancellationToken cancellationToken) => await Contexto.Set<TEntity>().FindAsync(id, cancellationToken);
+    public async Task<IList<TEntity>> GetAllAsync(CancellationToken cancellationToken) => await contexto.Set<TEntity>().ToListAsync(cancellationToken);
+    public async Task<TEntity> GetByIdAsync(int id, CancellationToken cancellationToken) => await contexto.Set<TEntity>().FindAsync(id, cancellationToken);
 }
