@@ -17,17 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RendaFixa.Domain", "renda-f
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5-Test", "5-Test", "{1ABC97CA-F988-4003-BA90-53F143CB9E7A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0-Artefatos", "0-Artefatos", "{4CC12AA8-87FF-4B06-A3FF-448E50581EA8}"
-	ProjectSection(SolutionItems) = preProject
-		Proposta = Proposta
-		README = README
-	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RendaFixa.Service", "renda-fixa-service\RendaFixa.Service.csproj", "{24845010-EAC1-4537-BD68-C9AA66A88056}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RendaFixa.Application", "renda-fixa-service\RendaFixa.Application.csproj", "{24845010-EAC1-4537-BD68-C9AA66A88056}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RendaFixa.Infrastruct", "renda-fixa-infra\RendaFixa.Infrastruct.csproj", "{078B0C8F-D542-4462-9B3A-27AA7A4CE264}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RendaFixa.Test", "RendaFixa.Test\RendaFixa.Test.csproj", "{4E81FDC6-F1A1-4A75-83E1-E4B0DE12C764}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RendaFixa.Test", "RendaFixa.Test\RendaFixa.Test.csproj", "{4E81FDC6-F1A1-4A75-83E1-E4B0DE12C764}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
