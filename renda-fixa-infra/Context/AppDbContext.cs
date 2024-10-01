@@ -6,7 +6,6 @@ namespace RendaFixa.Infrastruct.Context;
 
 public class AppDbContext : DbContext
 {
-    public AppDbContext() { }
     public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
     {
@@ -24,10 +23,5 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Conta>(new ContaMap().Configure);
         modelBuilder.Entity<Aporte>(new AporteMap().Configure);
         modelBuilder.Entity<ProdutoRendaFixa>(new ProdutoRendaFixaMap().Configure);
-    }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        //optionsBuilder.UseSqlServer("Server=localhost;Database=Financeiro;User Id=sa;Password=qwert112358;");
     }
 }
