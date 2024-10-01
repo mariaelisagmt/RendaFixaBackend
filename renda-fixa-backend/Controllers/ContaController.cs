@@ -1,12 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc;
 using RendaFixa.Domain.Interfaces;
 
 namespace RendaFixa.WebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ProdutoRendaFixaController : ControllerBase
+public class ContaFixaController : ControllerBase
 {
     private readonly IProdutoRendaFixaRepository service;
 
