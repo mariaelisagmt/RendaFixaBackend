@@ -2,7 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RendaFixa.Service.UseCases.Queries.GetContaById;
 
-namespace RendaFixa.WebApi.Controllers;
+namespace RendaFixaBackend.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -14,16 +14,10 @@ public class ContaController : ControllerBase
         this.mediator = mediator;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<GetContaByIdResponse>> GetById(GetContaByIdRequest request, CancellationToken cancellationToken)
+    [HttpGet("{id}")]
+    public async Task<ActionResult<GetContaByIdResponse>> GetById([FromRoute] int id, CancellationToken cancellationToken)
     {
-        var validador = new GetContaByIdValidator();
-        var validadorResultado = await validador.ValidateAsync(request, cancellationToken);
-
-        if (!validadorResultado.IsValid)
-        {
-            return BadRequest(validadorResultado.Errors);
-        }
+        var request = new GetContaByIdRequest(id);
 
         var resposta = await mediator.Send(request, cancellationToken);
         return Ok(resposta);
