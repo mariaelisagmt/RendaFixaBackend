@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace RendaFixa.Service.UseCases.Queries.GetAllProdutoRendaFixa;
+namespace RendaFixa.Service.UseCases.Queries.GetAllAportesByConta;
 
-public sealed record GetAllAportesByContaRequest(int ContaId) : IRequest<CreateAporteResponse>;
+public sealed record GetAllAportesByContaRequest(int ContaId) : IRequest<IList<GetAllAportesByContaResponse>>;
 

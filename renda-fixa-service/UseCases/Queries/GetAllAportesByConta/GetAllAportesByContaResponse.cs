@@ -1,7 +1,7 @@
-﻿using MediatR;
-using RendaFixa.Domain.Entities;
+﻿namespace RendaFixa.Service.UseCases.Queries.GetAllAportesByConta;
 
-namespace RendaFixa.Service.UseCases.Queries.GetAllProdutoRendaFixa;
-
-public sealed record CreateAporteResponse(int AporteId, int Status);
+public sealed record GetAllAportesByContaResponse(
+        int rendaFixaId,
+        DateTime dataOperacao,
+        int status);
 

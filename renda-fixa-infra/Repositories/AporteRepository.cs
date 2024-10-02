@@ -10,7 +10,7 @@ public class AporteRepository : BaseRepository<Aporte>, IAporteRepository
 {
     private readonly ILogger<AporteRepository> logger;
     public AporteRepository(
-         AppDbContext contexto, 
+         AppDbContext contexto,
          ILogger<AporteRepository> logger) : base(contexto)
     {
         this.logger = logger;
@@ -18,29 +18,37 @@ public class AporteRepository : BaseRepository<Aporte>, IAporteRepository
 
     public async Task<IList<Aporte>> GetAllByContaAsync(int contaId, CancellationToken cancellationToken)
     {
-        var conta = await contexto.Conta.FirstOrDefaultAsync(x => x.Id == contaId, cancellationToken);
-
-        if (conta == null)
+        try
         {
-            logger.LogError($"Erro ao encontrar a conta com id {contaId}");
+            var conta = await contexto.Conta.FirstOrDefaultAsync(x => x.Id == contaId, cancellationToken);
+
+            if (conta == null)
+            {
+                logger.LogError($"Erro ao encontrar a conta com id {contaId}");
+                return new List<Aporte>();
+            }
+
+            var aportes = await contexto.Aporte
+                .Where(x => x.ContaId == conta.Id)
+                .OrderBy(x => x.DataOperacao)
+                .ToListAsync(cancellationToken);
+
+            if (aportes == null)
+            {
+                logger.LogError($"Erro ao encontrar aportes para a conta id {contaId}");
+                return new List<Aporte>();
+            }
+
+            return aportes;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, $"Erro ao encontrar aportes para a conta id {contaId}");
             return new List<Aporte>();
         }
-
-        var aportes = await contexto.Aporte
-            .Where(x => x.ContaId == conta.Id)  
-            .OrderBy(x => x.DataOperacao)         
-            .ToListAsync(cancellationToken);
-
-        if (aportes == null)
-        {
-            logger.LogError($"Erro ao encontrar aportes para a conta id {contaId}");
-            return new List<Aporte>();
-        }
-
-        return aportes;
     }
 
-    public async Task<Aporte> RealizeAsync(int contaId, int produtoId, int quantidade, CancellationToken cancellationToken)
+    public async Task<Aporte> CreateAsync(int contaId, int produtoId, int quantidade, CancellationToken cancellationToken)
     {
         var conta = await contexto.Conta.FirstOrDefaultAsync(x => x.Id == contaId, cancellationToken);
 
@@ -64,16 +72,16 @@ public class AporteRepository : BaseRepository<Aporte>, IAporteRepository
             if (calculo < conta.Saldo)
             {
                 conta.Saldo -= calculo;
-                await repositorioConta.UpdateAsync(conta);
+                contexto.Conta.Update(conta);
 
                 var entidade = new Aporte(produtoId, contaId, DateTime.Now, 1);
-                await repositorioAporte.InsertAsync(entidade);
+                contexto.Aporte.Add(entidade);
 
                 produto.Estoque -= quantidade;
-                await repositorio.UpdateAsync(produto);
+                contexto.ProdutoRendaFixa.Update(produto);
+                return entidade;
             }
         }
-
-        return aporte;
+        return null;
     }
 }
