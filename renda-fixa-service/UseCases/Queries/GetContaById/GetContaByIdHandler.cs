@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using RendaFixa.Domain.Entities;
 using RendaFixa.Domain.Interfaces;
 
 namespace RendaFixa.Service.UseCases.Queries.GetContaById;
@@ -18,7 +17,6 @@ public class GetContaByIdHandler : IRequestHandler<GetContaByIdRequest, GetConta
 
     public async Task<GetContaByIdResponse> Handle(GetContaByIdRequest request, CancellationToken cancellationToken)
     {
-        var aporte = mapper.Map<Conta>(request);
 
         var resposta = await repository.GetByIdAsync(request.ContaId, cancellationToken);
 

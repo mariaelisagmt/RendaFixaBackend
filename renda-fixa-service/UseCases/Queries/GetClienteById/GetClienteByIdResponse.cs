@@ -2,5 +2,5 @@
 
 public sealed record GetClienteByIdResponse(
     int Id,
-    int Nome);
+    string Nome);
 

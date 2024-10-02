@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RendaFixa.Service.UseCases.Commandies.CreateAporte;
 using RendaFixa.Service.UseCases.Queries.GetAllAportesByConta;
 
-namespace RendaFixa.WebApi.Controllers;
+namespace RendaFixaBackend.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -31,16 +31,10 @@ public class AporteController : ControllerBase
         return Ok(resposta);
     }
 
-    [HttpGet]
-    public async Task<ActionResult<CreateAporteResponse>> GetAllByConta(GetAllAportesByContaRequest request, CancellationToken cancellationToken)
+    [HttpGet("{contaId}")]
+    public async Task<ActionResult<CreateAporteResponse>> GetAllByConta([FromRoute] int contaId, CancellationToken cancellationToken)
     {
-        var validador = new GetAllAportesByContaValidator();
-        var validadorResultado = await validador.ValidateAsync(request, cancellationToken);
-
-        if (!validadorResultado.IsValid)
-        {
-            return BadRequest(validadorResultado.Errors);
-        }
+        var request = new GetAllAportesByContaRequest(contaId);
 
         var resposta = await mediator.Send(request, cancellationToken);
         return Ok(resposta);

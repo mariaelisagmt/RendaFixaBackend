@@ -3,7 +3,7 @@ using RendaFixa.Domain.Entities;
 using RendaFixa.Domain.Interfaces;
 using RendaFixa.Infrastruct.Context;
 
-namespace RendaFixa.Infrastruct.Repository;
+namespace RendaFixa.Infrastruct.Repositories;
 
 public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
 {
