@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RendaFixa.Domain.Entities;
 
 namespace RendaFixa.Infrastruct.Mapping;
@@ -20,7 +20,7 @@ public class ContaMap : IEntityTypeConfiguration<Conta>
             .HasColumnName("codigo")
             .HasColumnType("int")
             .IsRequired();
-        
+
         builder.Property(p => p.Saldo)
             .HasColumnName("saldo")
             .HasColumnType("decimal")

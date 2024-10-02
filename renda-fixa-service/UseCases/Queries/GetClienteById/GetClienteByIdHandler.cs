@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using RendaFixa.Domain.Entities;
 using RendaFixa.Domain.Interfaces;
 
 namespace RendaFixa.Service.UseCases.Queries.GetClienteById;

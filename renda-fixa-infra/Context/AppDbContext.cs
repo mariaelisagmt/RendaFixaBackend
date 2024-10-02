@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RendaFixa.Infrastruct.Mapping;
 using RendaFixa.Domain.Entities;
+using RendaFixa.Infrastruct.Mapping;
 
 namespace RendaFixa.Infrastruct.Context;
 
