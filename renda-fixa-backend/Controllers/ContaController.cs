@@ -1,50 +1,31 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using RendaFixa.Domain.Interfaces;
+using RendaFixa.Service.UseCases.Queries.GetContaById;
 
 namespace RendaFixa.WebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ContaFixaController : ControllerBase
+public class ContaController : ControllerBase
 {
-    private readonly IProdutoRendaFixaRepository service;
-
-    public ProdutoRendaFixaController(
-        IProdutoRendaFixaRepository servico)
+    private readonly IMediator mediator;
+    public ContaController(IMediator mediator)
     {
-        service = servico;
+        this.mediator = mediator;
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<ActionResult<GetContaByIdResponse>> GetById(GetContaByIdRequest request, CancellationToken cancellationToken)
     {
-        var resultado = await service.GetAllAsync();
+        var validador = new GetContaByIdValidator();
+        var validadorResultado = await validador.ValidateAsync(request, cancellationToken);
 
-        return Ok(resultado);
+        if (!validadorResultado.IsValid)
+        {
+            return BadRequest(validadorResultado.Errors);
+        }
+
+        var resposta = await mediator.Send(request, cancellationToken);
+        return Ok(resposta);
     }
-
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetById([FromRoute]int id)
-    {
-        var resultado = await service.GetByIdAsync(id);
-
-        return Ok(resultado);
-    }
-
-    [HttpGet("{contaid}")]
-    public async Task<IActionResult> GetContaById([FromRoute]int contaid)
-    {
-        var resultado = await service.GetContaAsync(contaid);
-
-        return Ok(resultado);
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Comprar(int produtoId, int contaId, int qtd)
-    {
-        await service.ComprarAsync(produtoId, contaId, qtd);
-
-        return Ok();
-    }
-
 }

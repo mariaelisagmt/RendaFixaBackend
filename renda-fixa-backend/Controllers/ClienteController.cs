@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using RendaFixa.Service.UseCases.Queries.GetClienteById;
 
 namespace RendaFixa.WebApi.Controllers;
 
@@ -14,11 +15,18 @@ public class ClienteController : ControllerBase
         this.mediator = mediator;
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult> GetById([FromRoute]int id)
+    [HttpGet]
+    public async Task<ActionResult<GetClienteByIdResponse>> GetById(GetClienteByIdRequest request, CancellationToken cancellationToken)
     {
-        var resultado = await service.GetByIdAsync(id);
+        var validador = new GetClienteByIdValidator();
+        var validadorResultado = await validador.ValidateAsync(request, cancellationToken);
 
-        return Ok(resultado);
+        if (!validadorResultado.IsValid)
+        {
+            return BadRequest(validadorResultado.Errors);
+        }
+
+        var resposta = await mediator.Send(request, cancellationToken);
+        return Ok(resposta);
     }
 }

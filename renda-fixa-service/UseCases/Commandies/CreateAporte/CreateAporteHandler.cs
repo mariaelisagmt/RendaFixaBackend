@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using MediatR;
-using RendaFixa.Domain.Entities;
 using RendaFixa.Domain.Interfaces;
+using RendaFixa.Service.UseCases.Commandies.CreateAporte;
 
-namespace RendaFixa.Aplication.UseCases;
+namespace RendaFixa.Aplication.UseCases.Commandies.CreateAporte;
 
 public class CreateAporteHandler : IRequestHandler<CreateAporteRequest, CreateAporteResponse>
 {
-    private readonly IAporteRepository aporteRepository;//Colocar o i service 
+    private readonly IAporteRepository aporteRepository;
     private readonly IMapper mapper;
 
     public CreateAporteHandler(IAporteRepository aporteRepository, IMapper mapper)
@@ -18,10 +18,8 @@ public class CreateAporteHandler : IRequestHandler<CreateAporteRequest, CreateAp
 
     public async Task<CreateAporteResponse> Handle(CreateAporteRequest request, CancellationToken cancellationToken)
     {
-        var aporte = mapper.Map<Aporte>(request);
+        var resultado = await aporteRepository.CreateAsync(request.ContaId, request.ProdutoId, request.Quantidade, cancellationToken);
 
-        await aporteRepository.InsertAsync(aporte, cancellationToken);
-
-        return mapper.Map<CreateAporteResponse>(aporte);
+        return mapper.Map<CreateAporteResponse>(resultado);
     }
 }

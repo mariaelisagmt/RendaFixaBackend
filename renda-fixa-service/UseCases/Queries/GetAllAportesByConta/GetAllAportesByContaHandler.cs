@@ -1,25 +1,24 @@
 ﻿using AutoMapper;
 using MediatR;
-using RendaFixa.Domain.Entities;
 using RendaFixa.Domain.Interfaces;
 
-namespace RendaFixa.Service.UseCases.Queries.GetAllProdutoRendaFixa;
+namespace RendaFixa.Service.UseCases.Queries.GetAllAportesByConta;
 
-public class CreateAporteHandler : IRequestHandler<GetAllAportesByContaRequest, CreateAporteResponse>
+public class GetAllAportesByContaHandler : IRequestHandler<GetAllAportesByContaRequest, IList<GetAllAportesByContaResponse>>
 {
-    private readonly IAporteService service;
+    private readonly IAporteRepository aporteRepository;
+    private readonly IMapper mapper;
 
-    public CreateAporteHandler(IAporteService service)
+    public GetAllAportesByContaHandler(IAporteRepository aporteRepository, IMapper mapper)
     {
-        this.service = service;
+        this.aporteRepository = aporteRepository;
+        this.mapper = mapper;
     }
 
-    public async Task<CreateAporteResponse> Handle(GetAllAportesByContaRequest request, CancellationToken cancellationToken)
+    public async Task<IList<GetAllAportesByContaResponse>> Handle(GetAllAportesByContaRequest request, CancellationToken cancellationToken)
     {
-        var aporte = mapper.Map<Aporte>(request);
+        var resultado = await aporteRepository.GetAllByContaAsync(request.ContaId, cancellationToken);
 
-        await service.CreateAsync(aporte, cancellationToken);
-
-        return mapper.Map<CreateAporteResponse>(aporte);
+        return resultado.Select(x => mapper.Map<GetAllAportesByContaResponse>(x)).ToList();
     }
 }
