@@ -1,6 +1,6 @@
 using RendaFixa.Infrastruct.Config;
-using RendaFixa.Aplication.Config;
 using RendaFixa.Infrastruct.Context;
+using RendaFixa.Service.Config;
 
 var builder = WebApplication.CreateBuilder(args);
 

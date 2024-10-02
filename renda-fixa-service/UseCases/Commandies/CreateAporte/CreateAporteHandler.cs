@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using RendaFixa.Domain.Interfaces;
-using RendaFixa.Service.UseCases.Commandies.CreateAporte;
 
-namespace RendaFixa.Aplication.UseCases.Commandies.CreateAporte;
+namespace RendaFixa.Service.UseCases.Commandies.CreateAporte;
 
 public class CreateAporteHandler : IRequestHandler<CreateAporteRequest, CreateAporteResponse>
 {

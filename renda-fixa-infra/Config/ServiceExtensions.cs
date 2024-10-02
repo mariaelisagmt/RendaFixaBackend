@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RendaFixa.Domain.Interfaces;
 using RendaFixa.Infrastruct.Context;
-using RendaFixa.Infrastruct.Repository;
+using RendaFixa.Infrastruct.Repositories;
 
 namespace RendaFixa.Infrastruct.Config;
 
