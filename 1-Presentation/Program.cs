@@ -1,3 +1,6 @@
+using RendaFixa.Infrastruct.Config;
+using RendaFixa.Service.Config;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.ConfigureInfrastructApp(builder.Configuration);
@@ -12,7 +15,6 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
 if (app.Environment.IsDevelopment())
 {
     app.UseCors(x => x
