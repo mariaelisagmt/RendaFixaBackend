@@ -1,6 +1,3 @@
-using RendaFixa.Infrastruct.Config;
-using RendaFixa.Service.Config;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.ConfigureInfrastructApp(builder.Configuration);
