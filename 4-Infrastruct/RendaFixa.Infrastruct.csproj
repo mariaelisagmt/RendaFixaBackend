@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\renda-fixa-dominio\RendaFixa.Domain.csproj" />
+    <ProjectReference Include="..\2-Domain\RendaFixa.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

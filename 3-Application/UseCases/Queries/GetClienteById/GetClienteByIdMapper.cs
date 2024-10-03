@@ -7,7 +7,6 @@ public sealed class GetClienteByIdMapper : Profile
 {
     public GetClienteByIdMapper()
     {
-        //CreateMap<GetClienteByIdRequest, Cliente>();
         CreateMap<Cliente, GetClienteByIdResponse>();
     }
 }
