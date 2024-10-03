@@ -8,8 +8,8 @@ namespace RendaFixa.Infrastruct.Repositories;
 
 public class ProdutoRendaFixaRepository : BaseRepository<ProdutoRendaFixa>, IProdutoRendaFixaRepository
 {
-    private readonly ILogger<AporteRepository> logger;
-    public ProdutoRendaFixaRepository(AppDbContext contexto, ILogger<AporteRepository> logger) : base(contexto)
+    private readonly ILogger<ProdutoRendaFixaRepository> logger;
+    public ProdutoRendaFixaRepository(AppDbContext contexto, ILogger<ProdutoRendaFixaRepository> logger) : base(contexto)
     { }
     public async Task<IList<ProdutoRendaFixa>> GetProdutosAsync(CancellationToken cancellationToken)
     {

@@ -71,13 +71,13 @@ public class AporteRepository : BaseRepository<Aporte>, IAporteRepository
             var calculo = produto.PrecoUnitario * quantidade;
             if (calculo < conta.Saldo)
             {
-                conta.Saldo -= calculo;
+                conta.Debitar(calculo);
                 contexto.Conta.Update(conta);
 
                 var entidade = new Aporte(produtoId, contaId, DateTime.Now, 1);
                 contexto.Aporte.Add(entidade);
 
-                produto.Estoque -= quantidade;
+                produto.BaixarEstoque(quantidade);
                 contexto.ProdutoRendaFixa.Update(produto);
                 return entidade;
             }

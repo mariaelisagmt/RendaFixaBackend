@@ -6,13 +6,14 @@ namespace RendaFixa.Infrastruct.Context;
 
 public class AppDbContext : DbContext
 {
+    public AppDbContext() { }
     public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
     {
     }
 
     public DbSet<Cliente> Cliente { get; set; }
-    public DbSet<Conta> Conta { get; set; }
+    public virtual DbSet<Conta> Conta { get; set; }
     public DbSet<Aporte> Aporte { get; set; }
     public DbSet<ProdutoRendaFixa> ProdutoRendaFixa { get; set; }
 

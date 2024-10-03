@@ -12,17 +12,17 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     {
         this.contexto = contexto;
     }
-    public async Task InsertAsync(TEntity objeto, CancellationToken cancellationToken)
+    public async Task InsertAsync(TEntity objeto, CancellationToken cancellationToken = default)
     {
         await contexto.Set<TEntity>().AddAsync(objeto);
         await contexto.SaveChangesAsync(cancellationToken);
     }
-    public async Task UpdateAsync(TEntity objeto, CancellationToken cancellationToken)
+    public async Task UpdateAsync(TEntity objeto, CancellationToken cancellationToken = default)
     {
         contexto.Entry(objeto).State = EntityState.Modified;
         await contexto.SaveChangesAsync(cancellationToken);
     }
-    public async Task DeleteAsync(int id, CancellationToken cancellationToken)
+    public async Task DeleteAsync(int id, CancellationToken cancellationToken = default)
     {
         var entity = await GetByIdAsync(id, cancellationToken);
         if (entity != null)
@@ -31,6 +31,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
             await contexto.SaveChangesAsync(cancellationToken);
         }
     }
-    public async Task<IList<TEntity>> GetAllAsync(CancellationToken cancellationToken) => await contexto.Set<TEntity>().ToListAsync(cancellationToken);
-    public async Task<TEntity> GetByIdAsync(int id, CancellationToken cancellationToken) => await contexto.Set<TEntity>().FindAsync(id, cancellationToken);
+    public async Task<IList<TEntity>> GetAllAsync(CancellationToken cancellationToken = default) => await contexto.Set<TEntity>().ToListAsync(cancellationToken);
+    
+    public async Task<TEntity> GetByIdAsync(int id, CancellationToken cancellationToken = default) => await contexto.Set<TEntity>().FindAsync(id, cancellationToken);
 }
