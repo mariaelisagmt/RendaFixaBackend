@@ -45,9 +45,9 @@ namespace RendaFixa.Infrastruct.Migrations
                         .HasColumnType("int")
                         .HasColumnName("renda_fixa_fk");
 
-                    b.Property<int>("Status")
+                    b.Property<int>("Quantidade")
                         .HasColumnType("integer")
-                        .HasColumnName("status");
+                        .HasColumnName("Quantidade");
 
                     b.HasKey("Id");
 

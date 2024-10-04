@@ -5,7 +5,7 @@ public class Aporte : BaseEntity
     public int RendaFixaId { get; private set; }
     public int ContaId { get; private set; }
     public DateTime DataOperacao { get; private set; }
-    public int Status { get; private set; }
+    public int Quantidade { get; private set; }
     public virtual ProdutoRendaFixa RendaFixa { get; private set; }
     public virtual Conta Conta { get; private set; }
 
@@ -14,11 +14,11 @@ public class Aporte : BaseEntity
         int rendaFixaId,
         int contaId,
         DateTime dataOperacao,
-        int status)
+        int quantidade)
     {
         RendaFixaId = rendaFixaId;
         ContaId = contaId;
         DataOperacao = dataOperacao;
-        Status = status;
+        Quantidade = quantidade;
     }
 }

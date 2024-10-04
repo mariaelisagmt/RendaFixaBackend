@@ -11,12 +11,14 @@ public class ProdutoRendaFixa : BaseEntity
 
     public ProdutoRendaFixa() { }
     public ProdutoRendaFixa(
+        int id,
         string nome,
         string indexador,
         decimal precoUnitario,
         decimal taxa,
         int estoque)
     {
+        Id = id;
         Nome = nome;
         Indexador = indexador;
         PrecoUnitario = precoUnitario;

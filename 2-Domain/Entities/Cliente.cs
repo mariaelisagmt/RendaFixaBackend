@@ -9,10 +9,12 @@ public class Cliente : BaseEntity
 
     public Cliente() { }
     public Cliente(
+        int id,
         string nome,
         string cPF,
         DateTime dataNascimento)
     {
+        Id = id;
         Nome = nome;
         CPF = cPF;
         DataNascimento = dataNascimento;

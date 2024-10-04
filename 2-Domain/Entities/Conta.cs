@@ -14,10 +14,12 @@ public class Conta : BaseEntity
     public Conta() { }
 
     public Conta(
+        int id,
         int clienteId,
         decimal saldo,
         int codigo)
     {
+        Id = id;
         Codigo = codigo;
         Saldo = saldo;
         ClienteId = clienteId;

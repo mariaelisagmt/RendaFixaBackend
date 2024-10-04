@@ -17,7 +17,7 @@ public class AporteController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<CreateAporteResponse>> Create(CreateAporteRequest request, CancellationToken cancellationToken)
+    public async Task<ActionResult> Create(CreateAporteRequest request, CancellationToken cancellationToken)
     {
         var validador = new CreateAporteValidator();
         var validadorResultado = await validador.ValidateAsync(request, cancellationToken);
@@ -27,12 +27,12 @@ public class AporteController : ControllerBase
             return BadRequest(validadorResultado.Errors);
         }
 
-        var resposta = await mediator.Send(request, cancellationToken);
-        return Ok(resposta);
+        await mediator.Send(request, cancellationToken);
+        return Ok();
     }
 
     [HttpGet("{contaId}")]
-    public async Task<ActionResult<CreateAporteResponse>> GetAllByConta([FromRoute] int contaId, CancellationToken cancellationToken)
+    public async Task<ActionResult<GetAllAportesByContaResponse>> GetAllByConta([FromRoute] int contaId, CancellationToken cancellationToken)
     {
         var request = new GetAllAportesByContaRequest(contaId);
 

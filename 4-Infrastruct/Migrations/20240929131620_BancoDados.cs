@@ -70,7 +70,7 @@ namespace RendaFixa.Infrastruct.Migrations
                     renda_fixa_fk = table.Column<int>(type: "int", nullable: false),
                     conta_fk = table.Column<int>(type: "int", nullable: false),
                     data_operacao = table.Column<DateTime>(type: "datetime", nullable: false),
-                    status = table.Column<int>(type: "integer", nullable: false)
+                    quantidade = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
