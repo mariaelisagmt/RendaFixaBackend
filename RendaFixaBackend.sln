@@ -23,6 +23,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RendaFixa.Infrastruct", "4-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RendaFixa.Test", "5-Tests\RendaFixa.Test.csproj", "{080BF763-0215-4D24-BB42-5721828068BB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0-Configuration", "0-Configuration", "{79E89A1F-4F68-4BAC-B175-A506CCE3B0DB}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		.gitignore = .gitignore
+		Dockerfile = Dockerfile
+		Proposta = Proposta
+		README = README
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
