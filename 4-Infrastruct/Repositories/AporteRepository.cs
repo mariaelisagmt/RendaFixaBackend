@@ -48,40 +48,62 @@ public class AporteRepository : BaseRepository<Aporte>, IAporteRepository
         }
     }
 
-    public async Task<Aporte> CreateAsync(int contaId, int produtoId, int quantidade, CancellationToken cancellationToken)
+    public async Task CreateAsync(int contaId, int produtoId, int quantidade, CancellationToken cancellationToken)
     {
-        var conta = await contexto.Conta.FirstOrDefaultAsync(x => x.Id == contaId, cancellationToken);
+        using var transaction = await contexto.Database.BeginTransactionAsync(cancellationToken);
 
-        if (conta == null)
+        try
         {
-            logger.LogError($"Erro ao encontrar a conta com id {contaId}");
-            return null;
-        }
+            var conta = await contexto.Conta.FirstOrDefaultAsync(x => x.Id == contaId, cancellationToken);
 
-        var produto = await contexto.ProdutoRendaFixa.FirstOrDefaultAsync(x => x.Id == produtoId, cancellationToken);
-
-        if (produto == null)
-        {
-            logger.LogError($"Erro ao encontrar um produto de renda fixa com id {produtoId}");
-            return null;
-        }
-
-        if (quantidade < produto.Estoque)
-        {
-            var calculo = produto.PrecoUnitario * quantidade;
-            if (calculo < conta.Saldo)
+            if (conta == null)
             {
-                conta.Saldo -= calculo;
-                contexto.Conta.Update(conta);
-
-                var entidade = new Aporte(produtoId, contaId, DateTime.Now, 1);
-                contexto.Aporte.Add(entidade);
-
-                produto.Estoque -= quantidade;
-                contexto.ProdutoRendaFixa.Update(produto);
-                return entidade;
+                logger.LogError($"Erro ao encontrar a conta com id {contaId}");
+                return;
             }
+
+            var produto = await contexto.ProdutoRendaFixa.FirstOrDefaultAsync(x => x.Id == produtoId, cancellationToken);
+
+            if (produto == null)
+            {
+                logger.LogError($"Erro ao encontrar um produto de renda fixa com id {produtoId}");
+                return;
+            }
+
+            if (quantidade <= produto.Estoque)
+            {
+                var calculo = produto.PrecoUnitario * quantidade;
+
+                if (calculo <= conta.Saldo)
+                {
+                    conta.Debitar(calculo);
+                    contexto.Conta.Update(conta);
+
+                    var entidade = new Aporte(produtoId, contaId, DateTime.Now, quantidade);
+                    await contexto.Aporte.AddAsync(entidade, cancellationToken);
+
+                    produto.BaixarEstoque(quantidade);
+                    contexto.ProdutoRendaFixa.Update(produto);
+
+                    await contexto.SaveChangesAsync(cancellationToken);
+
+                    await transaction.CommitAsync(cancellationToken);
+                }
+                else
+                {
+                    logger.LogError($"Saldo insuficiente na conta {contaId} para realizar o aporte.");
+                }
+            }
+            else
+            {
+                logger.LogError($"Estoque insuficiente para o produto {produtoId}.");
+            }
+
         }
-        return null;
+        catch (Exception ex)
+        {
+            logger.LogError($"Erro ao realizar a operação de aporte: {ex.Message}");
+            await transaction.RollbackAsync(cancellationToken);
+        }
     }
 }

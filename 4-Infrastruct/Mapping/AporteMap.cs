@@ -26,8 +26,8 @@ public class AporteMap : IEntityTypeConfiguration<Aporte>
             .HasColumnType("datetime")
             .IsRequired();
 
-        builder.Property(p => p.Status)
-            .HasColumnName("status")
+        builder.Property(p => p.Quantidade)
+            .HasColumnName("quantidade")
             .HasColumnType("integer")
             .IsRequired();
     }
