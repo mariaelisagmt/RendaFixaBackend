@@ -10,6 +10,6 @@ public class AporteFaker : Faker<Aporte>
         RuleFor(a => a.RendaFixaId, f => f.Random.Int(1, 1000));
         RuleFor(a => a.ContaId, f => f.Random.Int(1, 1000));
         RuleFor(a => a.DataOperacao, f => f.Date.Past(2));
-        RuleFor(a => a.Status, f => f.PickRandom(0, 1));
+        RuleFor(a => a.Quantidade, f => f.PickRandom(0, 1));
     }
 }
