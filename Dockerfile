@@ -5,10 +5,11 @@ EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 ARG BUILD_CONFIGURATION=Release
-WORKDIR /src/aspnetapp
-COPY ["../1-Presentation/RendaFixaWebApi.csproj", "./"]
-RUN dotnet restore "./RendaFixaWebApi.csproj"
+WORKDIR /src
+COPY ["../1-Presentation/RendaFixaWebApi.csproj", "1-Presentation/"]
+RUN dotnet restore "./1-Presentation/RendaFixaWebApi.csproj"
 COPY . .
+WORKDIR "/src/1-Presentation"
 RUN dotnet build "./RendaFixaWebApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
