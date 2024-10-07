@@ -2,12 +2,12 @@
 
 public class ProdutoRendaFixa : BaseEntity
 {
-    public string Nome { get; private set; }
-    public string Indexador { get; private set; }
-    public decimal PrecoUnitario { get; private set; }
-    public decimal Taxa { get; private set; }
-    public int Estoque { get; private set; }
-    public virtual IList<Aporte> Aportes { get; private set; }
+    public string Nome { get;  set; }
+    public string Indexador { get;  set; }
+    public decimal PrecoUnitario { get;  set; }
+    public decimal Taxa { get;  set; }
+    public int Estoque { get;  set; }
+    public virtual IList<Aporte> Aportes { get;  set; }
 
     public ProdutoRendaFixa() { }
     public ProdutoRendaFixa(
