@@ -88,3 +88,11 @@ Inicie o servidor:
 ```bash
 dotnet run
 ```
+
+## Contato
+
+Para dúvidas ou sugestões, entre em contato:
+
+- **Seu Nome**: mariaelisagmt@gmail.com ou maria.elisa.gomes.de.matos@gmail.com
+- **LinkedIn**: [maria elisa gomes](https://linkedin.com/in/chagasduarte](https://www.linkedin.com/in/maria-elisa-gomes-de-matos/))
+
