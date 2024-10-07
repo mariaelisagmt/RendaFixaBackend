@@ -1,6 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
+
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
 namespace RendaFixa.Infrastruct.Migrations
 {
@@ -49,7 +52,8 @@ namespace RendaFixa.Infrastruct.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     cliente_fk = table.Column<int>(type: "int", nullable: false),
-                    codigo_conta = table.Column<int>(type: "int", nullable: false)
+                    codigo = table.Column<int>(type: "int", nullable: false),
+                    saldo = table.Column<decimal>(type: "decimal(18,0)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -87,6 +91,33 @@ namespace RendaFixa.Infrastruct.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.InsertData(
+                table: "cliente",
+                columns: new[] { "Id", "cpf", "data_nascimento", "nome" },
+                values: new object[] { 1, "12345678901", new DateTime(1995, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "João Silva" });
+
+            migrationBuilder.InsertData(
+                table: "produto_renda_fixa",
+                columns: new[] { "Id", "estoque", "indexador", "nome", "preco_unitario", "taxa" },
+                values: new object[,]
+                {
+                    { 1, 100, "Selic", "Tesouro Direto", 100.0000m, 5.0000m },
+                    { 2, 50, "CDI", "CDBs", 55.0000m, 3.0000m },
+                    { 3, 200, "IPCA", "Debêntures", 25.0000m, 4.0000m },
+                    { 4, 150, "IGPM", "Fundos de Renda Fixa", 30.0000m, 6.0000m },
+                    { 5, 75, "IPCA", "LCIs", 70.0000m, 5.0000m },
+                    { 6, 60, "CDI", "LCAs", 45.0000m, 3.0000m },
+                    { 7, 30, "IGPM", "CRIs", 60.0000m, 4.0000m },
+                    { 8, 40, "Selic", "CRAs", 80.0000m, 6.0000m },
+                    { 9, 20, "CDI", "Carteiras digitais remuneradas", 50.0000m, 3.0000m },
+                    { 10, 10, "IPCA", "Letra de Câmbio (LC)", 90.0000m, 5.0000m }
+                });
+
+            migrationBuilder.InsertData(
+                table: "conta",
+                columns: new[] { "Id", "cliente_fk", "codigo", "saldo" },
+                values: new object[] { 1, 1, 1001, 5000.00m });
+
             migrationBuilder.CreateIndex(
                 name: "IX_aporte_conta_fk",
                 table: "aporte",
@@ -101,8 +132,6 @@ namespace RendaFixa.Infrastruct.Migrations
                 name: "IX_conta_cliente_fk",
                 table: "conta",
                 column: "cliente_fk");
-
-            //TODO adicionando dados padrão para as tabelas
         }
 
         /// <inheritdoc />
