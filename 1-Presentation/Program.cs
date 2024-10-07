@@ -1,7 +1,19 @@
-using RendaFixa.Infrastruct.Config;
+﻿using RendaFixa.Infrastruct.Config;
 using RendaFixa.Service.Config;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configurar CORS para permitir o Angular acessar a API
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200") // Endere�o do Angular
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
 
 builder.Services.ConfigureInfrastructApp(builder.Configuration);
 builder.Services.ConfigureApplicationApp();
@@ -13,6 +25,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+// Habilitar CORS
+app.UseCors("AllowAngular");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -2,10 +2,10 @@
 
 public class Cliente : BaseEntity
 {
-    public string Nome { get; private set; }
-    public string CPF { get; private set; }
-    public DateTime DataNascimento { get; private set; }
-    public virtual IList<Conta> Contas { get; private set; }
+    public string Nome { get;  set; }
+    public string CPF { get;  set; }
+    public DateTime DataNascimento { get;  set; }
+    public virtual IList<Conta> Contas { get;  set; }
 
     public Cliente() { }
     public Cliente(

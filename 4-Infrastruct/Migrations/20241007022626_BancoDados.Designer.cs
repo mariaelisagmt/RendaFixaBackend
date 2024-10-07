@@ -12,7 +12,7 @@ using RendaFixa.Infrastruct.Context;
 namespace RendaFixa.Infrastruct.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240929131620_BancoDados")]
+    [Migration("20241007022626_BancoDados")]
     partial class BancoDados
     {
         /// <inheritdoc />
@@ -41,13 +41,13 @@ namespace RendaFixa.Infrastruct.Migrations
                         .HasColumnType("datetime")
                         .HasColumnName("data_operacao");
 
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("integer")
+                        .HasColumnName("quantidade");
+
                     b.Property<int>("RendaFixaId")
                         .HasColumnType("int")
                         .HasColumnName("renda_fixa_fk");
-
-                    b.Property<int>("Quantidade")
-                        .HasColumnType("integer")
-                        .HasColumnName("Quantidade");
 
                     b.HasKey("Id");
 
@@ -84,6 +84,15 @@ namespace RendaFixa.Infrastruct.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("cliente", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CPF = "12345678901",
+                            DataNascimento = new DateTime(1995, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Nome = "João Silva"
+                        });
                 });
 
             modelBuilder.Entity("RendaFixa.Domain.Entities.Conta", b =>
@@ -98,15 +107,28 @@ namespace RendaFixa.Infrastruct.Migrations
                         .HasColumnType("int")
                         .HasColumnName("cliente_fk");
 
-                    b.Property<int>("CodigoConta")
+                    b.Property<int>("Codigo")
                         .HasColumnType("int")
-                        .HasColumnName("codigo_conta");
+                        .HasColumnName("codigo");
+
+                    b.Property<decimal>("Saldo")
+                        .HasColumnType("decimal")
+                        .HasColumnName("saldo");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClienteId");
 
                     b.ToTable("conta", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClienteId = 1,
+                            Codigo = 1001,
+                            Saldo = 5000.00m
+                        });
                 });
 
             modelBuilder.Entity("RendaFixa.Domain.Entities.ProdutoRendaFixa", b =>
@@ -140,6 +162,98 @@ namespace RendaFixa.Infrastruct.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("produto_renda_fixa", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Estoque = 100,
+                            Indexador = "Selic",
+                            Nome = "Tesouro Direto",
+                            PrecoUnitario = 100.0000m,
+                            Taxa = 5.0000m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Estoque = 50,
+                            Indexador = "CDI",
+                            Nome = "CDBs",
+                            PrecoUnitario = 55.0000m,
+                            Taxa = 3.0000m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Estoque = 200,
+                            Indexador = "IPCA",
+                            Nome = "Debêntures",
+                            PrecoUnitario = 25.0000m,
+                            Taxa = 4.0000m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Estoque = 150,
+                            Indexador = "IGPM",
+                            Nome = "Fundos de Renda Fixa",
+                            PrecoUnitario = 30.0000m,
+                            Taxa = 6.0000m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Estoque = 75,
+                            Indexador = "IPCA",
+                            Nome = "LCIs",
+                            PrecoUnitario = 70.0000m,
+                            Taxa = 5.0000m
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Estoque = 60,
+                            Indexador = "CDI",
+                            Nome = "LCAs",
+                            PrecoUnitario = 45.0000m,
+                            Taxa = 3.0000m
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Estoque = 30,
+                            Indexador = "IGPM",
+                            Nome = "CRIs",
+                            PrecoUnitario = 60.0000m,
+                            Taxa = 4.0000m
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Estoque = 40,
+                            Indexador = "Selic",
+                            Nome = "CRAs",
+                            PrecoUnitario = 80.0000m,
+                            Taxa = 6.0000m
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Estoque = 20,
+                            Indexador = "CDI",
+                            Nome = "Carteiras digitais remuneradas",
+                            PrecoUnitario = 50.0000m,
+                            Taxa = 3.0000m
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Estoque = 10,
+                            Indexador = "IPCA",
+                            Nome = "Letra de Câmbio (LC)",
+                            PrecoUnitario = 90.0000m,
+                            Taxa = 5.0000m
+                        });
                 });
 
             modelBuilder.Entity("RendaFixa.Domain.Entities.Aporte", b =>
